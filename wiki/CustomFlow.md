@@ -1,0 +1,3 @@
+This is a bare minimum flow upon which you can build additional features or create new flows on top of an already made flow (just choose one that fits your needs). Simply implement this class, as it's already integrated into the project. Choose the CustomFlow option when starting the program by using custom in the appropriate place.
+
+It has one example feature that calculates the sum of the inter arrival times of the first 10 packets in both egress and ingress directions.
