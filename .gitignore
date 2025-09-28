@@ -14,11 +14,11 @@ Cargo.lock
 # testing files
 testing/
 
-rustiflow.toml
+af.toml
 
-/debian/rustiflow/
-/debian/rustiflow.debhelper.log
-/debian/rustiflow.substvars
+/debian/af/
+/debian/af.debhelper.log
+/debian/af.substvars
 /debian/files
 /debian/debhelper-build-stamp
 /debian/.debhelper/

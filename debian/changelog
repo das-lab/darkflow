@@ -1,4 +1,4 @@
-rustiflow (0.2.0-1) unstable; urgency=low
+af (0.2.0-1) unstable; urgency=low
 
   * Updated the Dockerfile for improved logging.
   * Added a slim Docker image.
@@ -12,7 +12,7 @@ rustiflow (0.2.0-1) unstable; urgency=low
   * Added 'ingress only' processing option.
   * Developed a terminal interface for configuration and monitoring.
   * Incorporated sequence number handling for enhanced TCP termination.
-  * Introduced new RustiFlow feature set.
+  * Introduced new AF feature set.
   * Updated usage of packet sizes to refer to payload sizes.
 
- -- IDLab <miel.verkerken@ugent.be>  Mon, 14 Apr 2025 10:00:00 +0000
+ -- alpinebuster <imzqqq@hotmail.com>  Sun, 28 Sep 2025 17:40:57 +0800

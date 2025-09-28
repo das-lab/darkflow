@@ -1,46 +1,43 @@
-![banner](figures/banner.jpg)
+# Anonymity Flow (AF)
 
-# A Network Traffic Feature Extraction Tool
+A Network Traffic Feature Extraction Tool.
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Overview
+## Overview
 
-This tool is engineered for robust and efficient feature extraction, particularly for applications such as network intrusion detection systems, among others. Leveraging Rust language and eBPF, it excels in processing high volumes of network traffic with remarkable speed and throughput. (When your traffic is already captured, don't worry! It also has a build in pcap reader which is also amazingly fast.) With various pre-defined feature sets and the ability to create custom feature sets, RustiFlow offers a versatile solution for network security applications.
-
-<a href="https://github.com/idlab-discover/RustiFlow/actions">![Badge displaying GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/idlab-discover/RustiFlow/rust.yml?logo=github)</a>
-<a href="https://idlab-discover.github.io/RustiFlow"> ![Badge linking to the project documentation website](https://img.shields.io/website?url=https%3A%2F%2Fidlab-discover.github.io%2FRustiFlow&label=Documentation)</a> <a href="https://github.com/idlab-discover/RustiFlow/blob/main/LICENSE"> ![GitHub license](https://img.shields.io/github/license/idlab-discover/RustiFlow) </a>
+This tool is engineered for robust and efficient feature extraction, particularly for applications such as network intrusion detection systems, among others. Leveraging Rust language and eBPF, it excels in processing high volumes of network traffic with remarkable speed and throughput. (When your traffic is already captured, don't worry! It also has a build in pcap reader which is also amazingly fast.) With various pre-defined feature sets and the ability to create custom feature sets, AF offers a versatile solution for network security applications.
 
 ![Ubuntu 24](https://img.shields.io/badge/Tested%20on%20ubuntu-purple?logo=ubuntu)
 
 ![Animated image showing network flows](figures/flows.gif)
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Key Features
+## Key Features
 
 - **High Throughput:** Utilizes Rust and the [Aya](https://aya-rs.dev/) library for eBPF program compilation and execution, ensuring exceptional performance and resource efficiency.
-- **Versatile Feature Sets:** Offers a variety of pre-defined feature sets (flows) and the flexibility to create custom feature sets tailored to specific requirements. An example of the custom flow is shown [here](https://github.com/idlab-discover/RustiFlow/blob/main/rustiflow/src/flows/custom_flow.rs).
+- **Versatile Feature Sets:** Offers a variety of pre-defined feature sets (flows) and the flexibility to create custom feature sets tailored to specific requirements. An example of the custom flow is shown [here](./af/src/flows/custom_flow.rs).
 - **Pcap File Support:** Facilitates packet analysis from pcap files, compatible with both Linux and Windows generated files.
 - **Diverse Output Options:** Features can be outputted to the console, a CSV file, or other formats with minimal effort.
 
 ## Feature sets
 
-See the [wiki](https://github.com/idlab-discover/RustiFlow/wiki) for the different feature sets available.
+See the [wiki](./wiki) for the different feature sets available.
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Architecture
+## Architecture
 
 ### Realtime processing
 
-![RustiFlow Architecture Realtime](figures/realtime.png)
+![AF Architecture Realtime](figures/realtime.png)
 
 ### Offline PCAP processing
 
-![RustiFlow Architecture Offline](figures/offline.png)
+![AF Architecture Offline](figures/offline.png)
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Using the release binary:
+## Using the release binary:
 
-Copy the rustiflow binary that you can find in this repo in releases to a location of your choice or to the `/usr/local/bin` folder.
+Copy the af binary that you can find in this repo in releases to a location of your choice or to the `/usr/local/bin` folder.
 If it does not have the right permissions, you can run the following command:
 
 ```bash
-chmod +x /path/to/rustiflow
+chmod +x /path/to/af
 ```
 
 ### Using commands:
@@ -49,18 +46,18 @@ You can then run the binary with the following commands displayed on the [help m
 
 ### Using the tui interface:
 
-If you want a more graphical interface, you can use the tui interface by just running `rustiflow` without any arguments. This will open a field where you can enter a configuration file you want to edit or you can choose to start new. After that, the following interface will show up:
+If you want a more graphical interface, you can use the tui interface by just running `af` without any arguments. This will open a field where you can enter a configuration file you want to edit or you can choose to start new. After that, the following interface will show up:
 
-![The tui interface](figures/tui_rustiflow.GIF)
+![The tui interface](figures/tui_af.gif)
 
 > **NOTE:** When using the save button, you will be prompted for a filename. You can reuse this file with following command:
 
 ```bash
-rustiflow --config-file <filename> realtime <interface> [--only-ingress]
+af --config-file <filename> realtime <interface> [--only-ingress]
 ```
 
 ```bash
-rustiflow -c <filename> pcap <path to pcap file>
+af -c <filename> pcap <path to pcap file>
 ```
 
 > After saving the configuration file, you can safely reset without changing the configuration file.
@@ -101,28 +98,28 @@ header = true
 drop_contaminant_features = false
 ```
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Using the Container:
+## Using the Container:
 
 Make sure that you don't use docker desktop and that you don't have it installed on your machine. If you have this setup, it will not work as intended as the `--network host` will not link the container to the host network, but to the network of a VM that docker desktop uses.
 
 - **Build the Container**:
   ```bash
-  docker build -t rustiflow .
+  docker build -t af .
   ```
 - **Run the Container**:
   ```bash
-  docker run --network host -v /path/on/host:/app rustiflow [ARGS like you are used to]
+  docker run --network host -v /path/on/host:/app af [ARGS like you are used to]
   ```
   Run it with the --privileged flag if you want to capture traffic in real-time.
 - **Example**:
   ```bash
-  docker run --network host -v /home/user/pcap:/app rustiflow pcap basic-flow 60 /app/pcap.pcap print
+  docker run --network host -v /home/user/pcap:/app af pcap basic-flow 60 /app/pcap.pcap print
   ```
   ```bash
-  docker run --privileged --network host -v /home/matisse/Documents:/app rustiflow realtime enp5s0 cic-flow 60 csv /app/output.csv
+  docker run --privileged --network host -v /home/matisse/Documents:/app af realtime enp5s0 cic-flow 60 csv /app/output.csv
   ```
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Installation Guide for development
+## Installation Guide for development
 
 ### Prerequisites:
 
@@ -157,7 +154,7 @@ Make sure that you don't use docker desktop and that you don't have it installed
   export PATH=/usr/lib/linux-tools/5.8.0-63-generic:$PATH
   ```
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Building the Project
+## Building the Project
 
 - **eBPF Programs**:
   ```bash
@@ -175,16 +172,16 @@ Make sure that you don't use docker desktop and that you don't have it installed
 cargo xtask run -- [OPTIONS] <COMMAND>
 ```
 
-## <img src="figures/RustiFlow_nobg.png" width="60px"/> Usage Instructions
+## Usage Instructions
 
 ### Command Help:
 
 ```bash
-rustiflow help
+af help
 ```
 
 ```bash
-Usage: rustiflow [OPTIONS] <COMMAND>
+Usage: af [OPTIONS] <COMMAND>
 
 Commands:
   realtime  Real-time feature extraction
@@ -203,7 +200,7 @@ Options:
           - cic:       Represents the CIC Flow, giving 83 features
           - cidds:     Represents the CIDDS Flow, giving 10 features
           - nfstream:  Represents a nfstream inspired flow, giving 69 features
-          - rustiflow: Represents the Rusti Flow, giving 120 features
+          - af: Represents the Rusti Flow, giving 120 features
           - custom:    Represents a flow that you can implement yourself
 
       --active-timeout <ACTIVE_TIMEOUT>
@@ -262,7 +259,7 @@ RUST_LOG=info cargo xtask run --
 ### Binary
 
 ```bash
-sudo RUST_LOG=info rustiflow
+sudo RUST_LOG=info af
 ```
 
 **Note:** For specific logging levels, adjust `RUST_LOG` to `error` for error messages, and `debug` for debug messages. If you don't want any additional logs, just remove `RUST_LOG=info`.

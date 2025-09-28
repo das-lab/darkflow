@@ -2,10 +2,10 @@
 mod tests {
     use std::net::{IpAddr, Ipv4Addr};
 
-    use crate::flows::{flow::Flow, rusti_flow::RustiFlow};
+    use crate::flows::{flow::Flow, rusti_flow::AF};
 
-    fn setup_rusti_flow() -> RustiFlow {
-        RustiFlow::new(
+    fn setup_rusti_flow() -> AF {
+        AF::new(
             "".to_string(),
             IpAddr::V4(Ipv4Addr::from(1)),
             80,

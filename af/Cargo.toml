@@ -1,5 +1,5 @@
 [package]
-name = "rustiflow"
+name = "af"
 version = "0.2.0"
 edition = "2021"
 publish = false
@@ -40,5 +40,5 @@ strum = "0.26.3"
 strum_macros = "0.26.4"
 
 [[bin]]
-name = "rustiflow"
+name = "af"
 path = "src/main.rs"

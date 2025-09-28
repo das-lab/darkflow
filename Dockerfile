@@ -27,7 +27,7 @@ WORKDIR /usr/src/app
 COPY Cargo.toml ./
 COPY .cargo ./.cargo
 COPY common ./common
-COPY rustiflow ./rustiflow
+COPY af ./af
 COPY xtask ./xtask
 COPY rustfmt.toml .
 COPY ebpf-ipv4 ./ebpf-ipv4
@@ -39,4 +39,4 @@ RUN cargo xtask ebpf-ipv6 --release
 RUN cargo build --release
 
 # Command
-ENTRYPOINT ["./target/release/rustiflow"]
+ENTRYPOINT ["./target/release/af"]

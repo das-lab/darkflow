@@ -23,7 +23,7 @@ use super::{
 
 /// Represents a Rusti Flow, a super-set of features from CICFlowMeter, CIDDS, NFStream and more.
 #[derive(Clone)]
-pub struct RustiFlow {
+pub struct AF {
     pub basic_flow: BasicFlow,
     pub packet_len_stats: PacketLengthStats,
     pub iat_stats: IATStats,
@@ -39,7 +39,7 @@ pub struct RustiFlow {
     pub timing_stats: TimingStats,
 }
 
-impl Flow for RustiFlow {
+impl Flow for AF {
     fn new(
         flow_id: String,
         ipv4_source: IpAddr,
@@ -49,7 +49,7 @@ impl Flow for RustiFlow {
         protocol: u8,
         timestamp_us: i64,
     ) -> Self {
-        RustiFlow {
+        AF {
             basic_flow: BasicFlow::new(
                 flow_id,
                 ipv4_source,

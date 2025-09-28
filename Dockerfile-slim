@@ -18,7 +18,7 @@ WORKDIR /usr/src/app
 COPY Cargo.toml ./
 COPY .cargo ./.cargo
 COPY common ./common
-COPY rustiflow ./rustiflow
+COPY af ./af
 COPY xtask ./xtask
 COPY rustfmt.toml .
 COPY ebpf-ipv4 ./ebpf-ipv4
@@ -40,10 +40,10 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the compiled binaries from the builder stage
-COPY --from=builder /usr/src/app/target/release/rustiflow /usr/local/bin/rustiflow
+COPY --from=builder /usr/src/app/target/release/af /usr/local/bin/af
 
 # Set environment variables
 ENV RUST_LOG=info
 
 # Command
-ENTRYPOINT ["rustiflow"]
+ENTRYPOINT ["af"]

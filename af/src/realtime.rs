@@ -276,11 +276,11 @@ fn load_ebpf_ipv4(interface: &str, tc_attach_type: TcAttachType) -> Result<Ebpf,
     // Loading the eBPF program, the macros make sure the correct file is loaded
     #[cfg(debug_assertions)]
     let mut bpf_ipv4 = Ebpf::load(include_bytes_aligned!(
-        "../../target/bpfel-unknown-none/debug/rustiflow-ebpf-ipv4"
+        "../../target/bpfel-unknown-none/debug/af-ebpf-ipv4"
     ))?;
     #[cfg(not(debug_assertions))]
     let mut bpf_ipv4 = Ebpf::load(include_bytes_aligned!(
-        "../../target/bpfel-unknown-none/release/rustiflow-ebpf-ipv4"
+        "../../target/bpfel-unknown-none/release/af-ebpf-ipv4"
     ))?;
 
     // Attach the eBPF program function
@@ -307,11 +307,11 @@ fn load_ebpf_ipv6(interface: &str, tc_attach_type: TcAttachType) -> Result<Ebpf,
     // Loading the eBPF program, the macros make sure the correct file is loaded
     #[cfg(debug_assertions)]
     let mut bpf_ipv6 = Ebpf::load(include_bytes_aligned!(
-        "../../target/bpfel-unknown-none/debug/rustiflow-ebpf-ipv6"
+        "../../target/bpfel-unknown-none/debug/af-ebpf-ipv6"
     ))?;
     #[cfg(not(debug_assertions))]
     let mut bpf_ipv6 = Ebpf::load(include_bytes_aligned!(
-        "../../target/bpfel-unknown-none/release/rustiflow-ebpf-ipv6"
+        "../../target/bpfel-unknown-none/release/af-ebpf-ipv6"
     ))?;
 
     // Attach the eBPF program function

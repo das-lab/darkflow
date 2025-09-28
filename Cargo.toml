@@ -1,2 +1,2 @@
 [workspace]
-members = ["rustiflow", "common", "xtask"]
+members = ["af", "common", "xtask"]
