@@ -48,8 +48,6 @@ You can then run the binary with the following commands displayed on the [help m
 
 If you want a more graphical interface, you can use the tui interface by just running `darkflow` without any arguments. This will open a field where you can enter a configuration file you want to edit or you can choose to start new. After that, the following interface will show up:
 
-![The tui interface](figures/tui_af.gif)
-
 > **NOTE:** When using the save button, you will be prompted for a filename. You can reuse this file with following command:
 
 ```bash

@@ -109,11 +109,11 @@ fn ui_main_screen<B: Backend>(f: &mut Frame<B>, app: &App) {
         .constraints([Constraint::Length(5), Constraint::Min(0)].as_ref())
         .split(size);
 
-    let rustiflow_art = "
-    █▀█ █ █ █▀ ▀█▀ █ █▀▀ █   █▀█ █ █ █
-    █▀▄ █▄█ ▄█  █  █ █▀  █▄▄ █▄█ ▀▄▀▄▀            Press 'q' to quit the graph";
+    let darkflow_art = "
+    █▀▄ ▄▀█  █▀█ █▄▀ █▀▀ █   █▀█ █   █▀█ █ █ █
+    █▄▀ ▀▄▀▄ █▀▄ █ █ █▀  █▄▄ █▄█ █▄▄ █▄█ ▀▄▀▄▀            Press 'q' to quit the graph";
 
-    let art_paragraph = Paragraph::new(rustiflow_art)
+    let art_paragraph = Paragraph::new(darkflow_art)
         .style(Style::default().fg(Color::Yellow))
         .alignment(Alignment::Left);
 

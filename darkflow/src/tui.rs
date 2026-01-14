@@ -702,11 +702,11 @@ fn ui_main_screen<B: Backend>(f: &mut Frame<B>, app: &App) {
         .constraints([Constraint::Percentage(50), Constraint::Percentage(50)].as_ref())
         .split(chunks[0]);
 
-    let rustiflow_art = "
-    █▀█ █ █ █▀ ▀█▀ █ █▀▀ █   █▀█ █ █ █
-    █▀▄ █▄█ ▄█  █  █ █▀  █▄▄ █▄█ ▀▄▀▄▀";
+    let darkflow_art = "
+    █▀▄ ▄▀█  █▀█ █▄▀ █▀▀ █   █▀█ █   █▀█ █ █ █
+    █▄▀ ▀▄▀▄ █▀▄ █ █ █▀  █▄▄ █▄█ █▄▄ █▄█ ▀▄▀▄▀";
 
-    let art_paragraph = Paragraph::new(rustiflow_art)
+    let art_paragraph = Paragraph::new(darkflow_art)
         .style(Style::default().fg(Color::Yellow))
         .alignment(Alignment::Left);
 

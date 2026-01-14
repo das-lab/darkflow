@@ -20,3 +20,6 @@ darkflow.toml
 /debian/files
 /debian/debhelper-build-stamp
 /debian/.debhelper/
+
+*.pcap*
+*.csv
