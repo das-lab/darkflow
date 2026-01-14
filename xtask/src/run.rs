@@ -60,7 +60,7 @@ pub fn run(opts: Options) -> Result<(), anyhow::Error> {
 
     // profile we are building (release or debug)
     let profile = if opts.release { "release" } else { "debug" };
-    let bin_path = format!("target/{profile}/af");
+    let bin_path = format!("target/{profile}/darkflow");
 
     // Determine if 'realtime' is one of the arguments in run_args
     let use_sudo = opts.run_args.iter().any(|arg| arg == "realtime") || opts.run_args.is_empty();

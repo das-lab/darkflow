@@ -1,2 +1,2 @@
 [workspace]
-members = ["af", "common", "xtask"]
+members = ["darkflow", "common", "xtask"]

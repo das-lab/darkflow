@@ -1,10 +1,10 @@
-# Anonymity Flow (AF)
+# Dark Flow (DF)
 
-A Network Traffic Feature Extraction Tool.
+A DarkNet ([Tor](https://spec.torproject.org/)) Traffic Feature Extraction Tool.
 
 ## Overview
 
-This tool is engineered for robust and efficient feature extraction, particularly for applications such as network intrusion detection systems, among others. Leveraging Rust language and eBPF, it excels in processing high volumes of network traffic with remarkable speed and throughput. (When your traffic is already captured, don't worry! It also has a build in pcap reader which is also amazingly fast.) With various pre-defined feature sets and the ability to create custom feature sets, AF offers a versatile solution for network security applications.
+This tool is engineered for robust and efficient feature extraction, particularly for applications such as network intrusion detection systems, among others. Leveraging Rust language and eBPF, it excels in processing high volumes of network traffic with remarkable speed and throughput. (When your traffic is already captured, don't worry! It also has a build in pcap reader which is also amazingly fast.) With various pre-defined feature sets and the ability to create custom feature sets, DF offers a versatile solution for network security applications.
 
 ![Ubuntu 24](https://img.shields.io/badge/Tested%20on%20ubuntu-purple?logo=ubuntu)
 
@@ -13,7 +13,7 @@ This tool is engineered for robust and efficient feature extraction, particularl
 ## Key Features
 
 - **High Throughput:** Utilizes Rust and the [Aya](https://aya-rs.dev/) library for eBPF program compilation and execution, ensuring exceptional performance and resource efficiency.
-- **Versatile Feature Sets:** Offers a variety of pre-defined feature sets (flows) and the flexibility to create custom feature sets tailored to specific requirements. An example of the custom flow is shown [here](./af/src/flows/custom_flow.rs).
+- **Versatile Feature Sets:** Offers a variety of pre-defined feature sets (flows) and the flexibility to create custom feature sets tailored to specific requirements. An example of the custom flow is shown [here](./darkflow/src/flows/custom_flow.rs).
 - **Pcap File Support:** Facilitates packet analysis from pcap files, compatible with both Linux and Windows generated files.
 - **Diverse Output Options:** Features can be outputted to the console, a CSV file, or other formats with minimal effort.
 
@@ -25,19 +25,19 @@ See the [wiki](./wiki) for the different feature sets available.
 
 ### Realtime processing
 
-![AF Architecture Realtime](figures/realtime.png)
+![DF Architecture Realtime](figures/realtime.png)
 
 ### Offline PCAP processing
 
-![AF Architecture Offline](figures/offline.png)
+![DF Architecture Offline](figures/offline.png)
 
 ## Using the release binary:
 
-Copy the af binary that you can find in this repo in releases to a location of your choice or to the `/usr/local/bin` folder.
+Copy the darkflow binary that you can find in this repo in releases to a location of your choice or to the `/usr/local/bin` folder.
 If it does not have the right permissions, you can run the following command:
 
 ```bash
-chmod +x /path/to/af
+chmod +x /path/to/darkflow
 ```
 
 ### Using commands:
@@ -46,18 +46,18 @@ You can then run the binary with the following commands displayed on the [help m
 
 ### Using the tui interface:
 
-If you want a more graphical interface, you can use the tui interface by just running `af` without any arguments. This will open a field where you can enter a configuration file you want to edit or you can choose to start new. After that, the following interface will show up:
+If you want a more graphical interface, you can use the tui interface by just running `darkflow` without any arguments. This will open a field where you can enter a configuration file you want to edit or you can choose to start new. After that, the following interface will show up:
 
 ![The tui interface](figures/tui_af.gif)
 
 > **NOTE:** When using the save button, you will be prompted for a filename. You can reuse this file with following command:
 
 ```bash
-af --config-file <filename> realtime <interface> [--only-ingress]
+darkflow --config-file <filename> realtime <interface> [--only-ingress]
 ```
 
 ```bash
-af -c <filename> pcap <path to pcap file>
+darkflow -c <filename> pcap <path to pcap file>
 ```
 
 > After saving the configuration file, you can safely reset without changing the configuration file.
@@ -104,19 +104,19 @@ Make sure that you don't use docker desktop and that you don't have it installed
 
 - **Build the Container**:
   ```bash
-  docker build -t af .
+  docker build -t darkflow .
   ```
 - **Run the Container**:
   ```bash
-  docker run --network host -v /path/on/host:/app af [ARGS like you are used to]
+  docker run --network host -v /path/on/host:/app darkflow [ARGS like you are used to]
   ```
   Run it with the --privileged flag if you want to capture traffic in real-time.
 - **Example**:
   ```bash
-  docker run --network host -v /home/user/pcap:/app af pcap basic-flow 60 /app/pcap.pcap print
+  docker run --network host -v /home/user/pcap:/app darkflow pcap basic-flow 60 /app/pcap.pcap print
   ```
   ```bash
-  docker run --privileged --network host -v /home/matisse/Documents:/app af realtime enp5s0 cic-flow 60 csv /app/output.csv
+  docker run --privileged --network host -v /home/matisse/Documents:/app darkflow realtime enp5s0 cic-flow 60 csv /app/output.csv
   ```
 
 ## Installation Guide for development
@@ -177,11 +177,11 @@ cargo xtask run -- [OPTIONS] <COMMAND>
 ### Command Help:
 
 ```bash
-af help
+darkflow help
 ```
 
 ```bash
-Usage: af [OPTIONS] <COMMAND>
+Usage: darkflow [OPTIONS] <COMMAND>
 
 Commands:
   realtime  Real-time feature extraction
@@ -200,7 +200,7 @@ Options:
           - cic:       Represents the CIC Flow, giving 83 features
           - cidds:     Represents the CIDDS Flow, giving 10 features
           - nfstream:  Represents a nfstream inspired flow, giving 69 features
-          - af: Represents the Rusti Flow, giving 120 features
+          - darkflow: Represents the Rusti Flow, giving 120 features
           - custom:    Represents a flow that you can implement yourself
 
       --active-timeout <ACTIVE_TIMEOUT>
@@ -259,7 +259,7 @@ RUST_LOG=info cargo xtask run --
 ### Binary
 
 ```bash
-sudo RUST_LOG=info af
+sudo RUST_LOG=info darkflow
 ```
 
 **Note:** For specific logging levels, adjust `RUST_LOG` to `error` for error messages, and `debug` for debug messages. If you don't want any additional logs, just remove `RUST_LOG=info`.

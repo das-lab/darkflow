@@ -18,7 +18,7 @@ WORKDIR /usr/src/app
 COPY Cargo.toml ./
 COPY .cargo ./.cargo
 COPY common ./common
-COPY af ./af
+COPY darkflow ./darkflow
 COPY xtask ./xtask
 COPY rustfmt.toml .
 COPY ebpf-ipv4 ./ebpf-ipv4
@@ -40,10 +40,10 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the compiled binaries from the builder stage
-COPY --from=builder /usr/src/app/target/release/af /usr/local/bin/af
+COPY --from=builder /usr/src/app/target/release/darkflow /usr/local/bin/darkflow
 
 # Set environment variables
 ENV RUST_LOG=info
 
 # Command
-ENTRYPOINT ["af"]
+ENTRYPOINT ["darkflow"]

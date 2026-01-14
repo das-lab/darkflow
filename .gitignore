@@ -14,11 +14,11 @@ Cargo.lock
 # testing files
 testing/
 
-af.toml
+darkflow.toml
 
-/debian/af/
-/debian/af.debhelper.log
-/debian/af.substvars
+/debian/darkflow/
+/debian/darkflow.debhelper.log
+/debian/darkflow.substvars
 /debian/files
 /debian/debhelper-build-stamp
 /debian/.debhelper/
