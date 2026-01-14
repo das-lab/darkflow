@@ -4,6 +4,7 @@
         "ebpf",
         "libpcap",
         "rustup",
+        "userspace",
         "xtask"
     ]
 }

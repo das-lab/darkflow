@@ -162,6 +162,8 @@ Make sure that you don't use docker desktop and that you don't have it installed
 - **User Space Programs**:
   ```bash
   cargo build
+  # or
+  cargo build --release
   ```
 
 ## Running the Project in dev mode

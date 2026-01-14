@@ -2,7 +2,10 @@
 FROM rust:latest AS builder
 
 # Install build dependencies
-RUN apt-get update && apt-get install -y \
+RUN \
+    --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y \
     libpcap-dev \
     iproute2 \
     && rustup toolchain install stable \
@@ -33,7 +36,10 @@ RUN cargo xtask ebpf-ipv4 --release && \
 FROM debian:bookworm-slim
 
 # Install runtime dependencies
-RUN apt-get update && apt-get install -y \
+RUN \
+    --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y \
     libpcap0.8 \
     iproute2 \
     --no-install-recommends && \
