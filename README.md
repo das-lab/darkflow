@@ -227,7 +227,7 @@ Options:
           - cic:       Represents the CIC Flow, giving 83 features
           - cidds:     Represents the CIDDS Flow, giving 10 features
           - nfstream:  Represents a nfstream inspired flow, giving 69 features
-          - darkflow: Represents the Rusti Flow, giving 120 features
+          - rustiflow: Represents the Rusti Flow, giving 120 features
           - custom:    Represents a flow that you can implement yourself
 
       --active-timeout <ACTIVE_TIMEOUT>
