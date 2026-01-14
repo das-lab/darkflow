@@ -23,6 +23,29 @@ See the [wiki](./wiki) for the different feature sets available.
 
 ## Architecture
 
+```
+project/
+├─ common/             # Shared data structures
+│  ├─ Cargo.toml
+│  └─ ...
+│
+├─ darkflow/           # User-space loader crate
+│  ├─ Cargo.toml       # Your posted configuration
+│  └─ src/main.rs      # Loader code
+│
+├─ ebpf-ipv4/          # Kernel eBPF crate (IPv4)
+│  ├─ Cargo.toml
+│  └─ src/main.rs       # #[no_std] #[no_main] eBPF program
+├─ ebpf-ipv6/          # Kernel eBPF crate (IPv6)
+│  ├─ Cargo.toml
+│  └─ src/main.rs       # #[no_std] #[no_main] eBPF program
+│
+├─ xtask/              # Project automation crate
+│  ├─ Cargo.toml
+│  └─ src/main.rs      # Custom tasks (e.g., build eBPF, generate code, deploy)
+│  └─ ...
+```
+
 ### Realtime processing
 
 ![DF Architecture Realtime](figures/realtime.png)
@@ -158,6 +181,10 @@ Make sure that you don't use docker desktop and that you don't have it installed
   ```bash
   cargo xtask ebpf-ipv4
   cargo xtask ebpf-ipv6
+
+  # or
+  cargo xtask ebpf-ipv4 --release
+  cargo xtask ebpf-ipv6 --release
   ```
 - **User Space Programs**:
   ```bash
