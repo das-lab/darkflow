@@ -110,8 +110,8 @@ fn ui_main_screen<B: Backend>(f: &mut Frame<B>, app: &App) {
         .split(size);
 
     let darkflow_art = "
-    █▀▄ ▄▀█  █▀█ █▄▀ █▀▀ █   █▀█ █   █▀█ █ █ █
-    █▄▀ ▀▄▀▄ █▀▄ █ █ █▀  █▄▄ █▄█ █▄▄ █▄█ ▀▄▀▄▀            Press 'q' to quit the graph";
+    █▀▄ ▄▀█  █▀█ █▄▀  █▀▀ █   █▀█ █ █ █
+    █▄▀ ▀▄▀▄ █▀▄ █ █  █▀  █▄▄ █▄█ ▀▄▀▄▀            Press 'q' to quit the graph";
 
     let art_paragraph = Paragraph::new(darkflow_art)
         .style(Style::default().fg(Color::Yellow))

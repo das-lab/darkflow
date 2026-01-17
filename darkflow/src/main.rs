@@ -17,7 +17,7 @@ use args::{Cli, Commands, ConfigFile, ExportConfig, FlowType, OutputConfig};
 use clap::Parser;
 use flows::{
     basic_flow::BasicFlow, cidds_flow::CiddsFlow, custom_flow::CustomFlow, flow::Flow,
-    nf_flow::NfFlow,
+    nf_flow::NfFlow, dark_flow::DarkFlow
 };
 use log::{debug, error, info};
 use output::OutputWriter;
@@ -171,6 +171,7 @@ async fn run_with_config(config: Config) {
                 FlowType::CIDDS => execute_realtime!(CiddsFlow),
                 FlowType::Nfstream => execute_realtime!(NfFlow),
                 FlowType::Rustiflow => execute_realtime!(RustiFlow),
+                FlowType::DarkFlow => execute_realtime!(DarkFlow),
                 FlowType::Custom => execute_realtime!(CustomFlow),
             }
         }
@@ -241,6 +242,7 @@ async fn run_with_config(config: Config) {
                 FlowType::CIDDS => execute_offline!(CiddsFlow),
                 FlowType::Nfstream => execute_offline!(NfFlow),
                 FlowType::Rustiflow => execute_offline!(RustiFlow),
+                FlowType::DarkFlow => execute_offline!(DarkFlow),
                 FlowType::Custom => execute_offline!(CustomFlow),
             }
         }

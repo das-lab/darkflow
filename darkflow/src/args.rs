@@ -173,6 +173,9 @@ pub enum FlowType {
     /// Represents the Rusti Flow, giving 120 features.
     Rustiflow,
 
+    /// Represents the multi-flow behavior of Tor.
+    DarkFlow,
+
     /// Represents a flow that you can implement yourself.
     Custom,
 }

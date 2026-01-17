@@ -1,6 +1,6 @@
 # Dark Flow (DF)
 
-A DarkNet ([Tor](https://spec.torproject.org/)) Traffic Feature Extraction Tool.
+A DarkNet ([Tor](https://spec.torproject.org/)) Traffic Feature Extraction Tool based on [RustiFlow](https://github.com/idlab-discover/RustiFlow).
 
 ## Overview
 
@@ -27,22 +27,23 @@ See the [wiki](./wiki) for the different feature sets available.
 project/
 ├─ common/             # Shared data structures
 │  ├─ Cargo.toml
-│  └─ ...
+│  └─ src/lib.rs       # `EbpfEventIp*`
 │
 ├─ darkflow/           # User-space loader crate
-│  ├─ Cargo.toml       # Your posted configuration
+│  ├─ Cargo.toml
 │  └─ src/main.rs      # Loader code
+│  └─ ...
 │
 ├─ ebpf-ipv4/          # Kernel eBPF crate (IPv4)
 │  ├─ Cargo.toml
-│  └─ src/main.rs       # #[no_std] #[no_main] eBPF program
+│  └─ src/main.rs      # `#[no_std]` `#[no_main]` eBPF program
 ├─ ebpf-ipv6/          # Kernel eBPF crate (IPv6)
 │  ├─ Cargo.toml
-│  └─ src/main.rs       # #[no_std] #[no_main] eBPF program
+│  └─ src/main.rs      # `#[no_std]` `#[no_main]` eBPF program
 │
 ├─ xtask/              # Project automation crate
 │  ├─ Cargo.toml
-│  └─ src/main.rs      # Custom tasks (e.g., build eBPF, generate code, deploy)
+│  └─ src/main.rs      # Custom tasks (Workflow for eBPF compilation)
 │  └─ ...
 ```
 
@@ -197,6 +198,14 @@ Make sure that you don't use docker desktop and that you don't have it installed
 
 ```bash
 cargo xtask run -- [OPTIONS] <COMMAND>
+```
+
+## Running tests
+
+```bash
+cargo test
+cargo test -- --fail-fast
+cargo test --no-run
 ```
 
 ## Usage Instructions

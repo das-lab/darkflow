@@ -1,18 +1,5 @@
-darkflow (0.2.0-1) unstable; urgency=low
+darkflow (0.6.0-1) unstable; urgency=low
 
-  * Updated the Dockerfile for improved logging.
-  * Added a slim Docker image.
-  * Fixed packet timestamp handling.
-  * Included headers in flow output.
-  * Changed flow termination to be based on packet time instead of machine time.
-  * Added ICMP traffic support.
-  * Enabled tool configuration via config file.
-  * Implemented graceful shutdown functionality.
-  * Introduced flow expiration interval as a configurable parameter.
-  * Added 'ingress only' processing option.
-  * Developed a terminal interface for configuration and monitoring.
-  * Incorporated sequence number handling for enhanced TCP termination.
-  * Introduced new RustiFlow feature set.
-  * Updated usage of packet sizes to refer to payload sizes.
+  * Introduced new DarkFlow feature set.
 
- -- alpinebuster <imzqqq@hotmail.com>  Sun, 28 Sep 2025 17:40:57 +0800
+ -- alpinebuster <imzqqq@hotmail.com>  Sat, 17 Jan 2026 14:23:57 +0800
