@@ -8,7 +8,7 @@ use std::{
 pub struct OutputWriter<T> {
     write_header: bool,
     skip_contaminant_features: bool,
-    writer: BufWriter<Box<dyn Write + Send>>,
+    writer: Box<dyn Write + Send>,
     _phantom_data: std::marker::PhantomData<T>,
 }
 
@@ -22,15 +22,15 @@ where
         skip_contaminant_features: bool,
         file_path: Option<String>,
     ) -> Self {
-        let writer: BufWriter<Box<dyn Write + Send>> = match export_type {
+        let writer: Box<dyn Write + Send> = match export_type {
             ExportMethodType::Csv => {
                 let path = file_path
                     .clone()
                     .expect("File path required for CSV output");
                 let file = File::create(&path).expect("Failed to create file");
-                BufWriter::new(Box::new(file))
+                Box::new(BufWriter::new(file))
             }
-            ExportMethodType::Print => BufWriter::new(Box::new(std::io::stdout())),
+            ExportMethodType::Print => Box::new(std::io::stdout()) as Box<dyn Write + Send>,
         };
 
         OutputWriter {

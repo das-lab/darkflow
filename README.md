@@ -290,5 +290,3 @@ sudo RUST_LOG=info darkflow
 ```
 
 **Note:** For specific logging levels, adjust `RUST_LOG` to `error` for error messages, and `debug` for debug messages. If you don't want any additional logs, just remove `RUST_LOG=info`.
-
----
