@@ -4,21 +4,21 @@ use crate::packet_features::PacketFeatures;
 
 use super::{
     basic_flow::BasicFlow,
-    features::{icmp_stats::IcmpStats, util::FlowFeature},
+    features::{packet_sequence::PacketSequence, util::FlowFeature},
     flow::Flow,
     util::FlowExpireCause,
 };
 
 /// Represents the multi-flow behavior of Tor.
 #[derive(Clone)]
-pub struct DarkFlow {
+pub struct Darkflow {
     /// Choose here for an existing flow type or leave the basic flow.
     pub basic_flow: BasicFlow,
     /// Add here the additional features.
-    pub icmp_stats: IcmpStats,
+    pub packet_seq: PacketSequence,
 }
 
-impl Flow for DarkFlow {
+impl Flow for Darkflow {
     fn new(
         flow_id: String,
         ipv4_source: IpAddr,
@@ -28,7 +28,7 @@ impl Flow for DarkFlow {
         protocol: u8,
         timestamp_us: i64,
     ) -> Self {
-        DarkFlow {
+        Darkflow {
             basic_flow: BasicFlow::new(
                 flow_id,
                 ipv4_source,
@@ -39,7 +39,7 @@ impl Flow for DarkFlow {
                 timestamp_us,
             ),
             // Add here the initialization of the additional features, e.g. icmp stats.
-            icmp_stats: IcmpStats::new(),
+            packet_seq: PacketSequence::new(),
         }
     }
 
@@ -49,7 +49,7 @@ impl Flow for DarkFlow {
         let is_terminated = self.basic_flow.update_flow(packet, fwd);
 
         // Add here the update of the additional features.
-        self.icmp_stats.update(packet, fwd, last_timestamp_us);
+        self.packet_seq.update(packet, fwd, last_timestamp_us);
 
         // Return the termination status of the flow.
         is_terminated
@@ -58,36 +58,37 @@ impl Flow for DarkFlow {
     fn close_flow(&mut self, timestamp_us: i64, cause: FlowExpireCause) {
         self.basic_flow.close_flow(timestamp_us, cause);
 
-        self.icmp_stats.close(timestamp_us, cause);
+        // Add here the close of the customized darkflow.
+        self.packet_seq.close(timestamp_us, cause);
     }
 
     fn dump(&self) -> String {
-        // Add here the dump of the custom flow.
+        // Add here the dump of the customized darkflow.
         format!(
-            "{},{},{}",
+            "{},{}",
             self.basic_flow.flow_key,
-            self.icmp_stats.get_type(),
-            self.icmp_stats.get_code()
+            self.packet_seq.dump(),
         )
     }
 
     fn get_features() -> String {
-        // Add here the features of the custom flow.
-        format!("flow_id,icmp_type,icmp_code")
+        // Add here the features of the customized darkflow.
+        format!(
+            "flow_id,{}",
+            PacketSequence::headers()
+        )
     }
 
     fn dump_without_contamination(&self) -> String {
-        // Add here the dump of the custom flow without contaminant features.
+        // Add here the dump of the customized darkflow without contaminant features.
         format!(
-            "{},{}",
-            self.icmp_stats.get_type(),
-            self.icmp_stats.get_code()
+            "{}", self.packet_seq.dump()
         )
     }
 
     fn get_features_without_contamination() -> String {
-        // Add here the features of the custom flow without contaminant features.
-        format!("icmp_type,icmp_code")
+        // Add here the features of the customized darkflow without contaminant features.
+        PacketSequence::headers()
     }
 
     fn get_first_timestamp_us(&self) -> i64 {
