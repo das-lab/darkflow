@@ -5,6 +5,7 @@ use super::util::{FlowFeature};
 pub struct PacketSequence {
     dirs: Vec<i32>,        // Direction (/ -)
     lens: Vec<i32>,        // With direction (/ -)
+    flags: Vec<i32>,       // With direction (/ -)
     timestamps: Vec<i64>,  // Relative time us
     first_ts: Option<i64>,
 }
@@ -14,6 +15,7 @@ impl PacketSequence {
         Self {
             dirs: Vec::new(),
             lens: Vec::new(),
+            flags: Vec::new(),
             timestamps: Vec::new(),
             first_ts: None,
         }
@@ -67,5 +69,21 @@ impl FlowFeature for PacketSequence {
         Self: Sized,
     {
         "pkt_dir_seq,pkt_len_seq,pkt_len_dir_seq,pkt_usec_seq".to_string()
+    }
+}
+
+impl PacketSequence {
+    pub fn dump_dir_len(&self) -> String {
+        format!(
+            "{},{}",
+            Self::vec_to_string(&self.dirs),
+            Self::vec_to_string(
+                &self.lens.iter().map(|v| v.abs()).collect::<Vec<_>>()
+            ),
+        )
+    }
+
+    pub fn headers_dir_len() -> String {
+        "pkt_dir_seq,pkt_len_seq".to_string()
     }
 }
