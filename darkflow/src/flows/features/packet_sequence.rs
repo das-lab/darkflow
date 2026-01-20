@@ -62,6 +62,6 @@ impl FlowFeature for PacketSequence {
     where
         Self: Sized,
     {
-        "packet_len_seq,packet_len_seq_dir,packet_time_seq".to_string()
+        "pkt_len_seq,pkt_len_dir_seq,pkt_time_seq".to_string()
     }
 }
