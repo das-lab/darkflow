@@ -5,6 +5,7 @@
         "libpcap",
         "rustup",
         "subflow",
+        "usec",
         "userspace",
         "xtask"
     ]

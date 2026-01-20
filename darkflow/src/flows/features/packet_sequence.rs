@@ -3,6 +3,7 @@ use super::util::{FlowFeature};
 
 #[derive(Clone)]
 pub struct PacketSequence {
+    dirs: Vec<i32>,        // Direction (/ -)
     lens: Vec<i32>,        // With direction (/ -)
     timestamps: Vec<i64>,  // Relative time us
     first_ts: Option<i64>,
@@ -11,6 +12,7 @@ pub struct PacketSequence {
 impl PacketSequence {
     pub fn new() -> Self {
         Self {
+            dirs: Vec::new(),
             lens: Vec::new(),
             timestamps: Vec::new(),
             first_ts: None,
@@ -33,6 +35,7 @@ impl FlowFeature for PacketSequence {
         // Initialize the time of the first package
         let first = self.first_ts.get_or_insert(ts);
 
+        self.dirs.push(if fwd { 1 } else { -1 });
         // Bag length (with direction)
         let len = packet.length as i32;
         let signed_len = if fwd { len } else { -len };
@@ -46,14 +49,15 @@ impl FlowFeature for PacketSequence {
 
     fn dump(&self) -> String {
         format!(
-            "{},{},{}",
-            // 1. Pure packet length sequence
+            "{},{},{},{}",
+            Self::vec_to_string(&self.dirs),
+            // Pure packet length sequence
             Self::vec_to_string(
                 &self.lens.iter().map(|v| v.abs()).collect::<Vec<_>>()
             ),
-            // 2. Long sequence of upstream and downstream packets
+            // Long sequence of upstream and downstream packets
             Self::vec_to_string(&self.lens),
-            // 3. Time series
+            // Time series
             Self::vec_to_string(&self.timestamps),
         )
     }
@@ -62,6 +66,6 @@ impl FlowFeature for PacketSequence {
     where
         Self: Sized,
     {
-        "pkt_len_seq,pkt_len_dir_seq,pkt_time_seq".to_string()
+        "pkt_dir_seq,pkt_len_seq,pkt_len_dir_seq,pkt_usec_seq".to_string()
     }
 }
