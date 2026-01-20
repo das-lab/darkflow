@@ -21,5 +21,6 @@ darkflow.toml
 /debian/debhelper-build-stamp
 /debian/.debhelper/
 
+__pycache__
 *.pcap*
 *.csv
