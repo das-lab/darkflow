@@ -4,7 +4,16 @@ use strum_macros::{EnumString, VariantNames};
 
 #[derive(Debug, Parser)]
 #[clap(author, version, about)]
-#[clap(group(ArgGroup::new("config_group").args(&["config_file"])), group(ArgGroup::new("cli_group").args(&["features", "output", "active_timeout", "idle_timeout", "export_path"]).multiple(true)))]
+#[clap(
+    group(ArgGroup::new("config_group").args(&["config_file"])),
+    group(ArgGroup::new("cli_group").args(&[
+        "features",
+        "output",
+        "active_timeout",
+        "idle_timeout",
+        "export_path",
+    ]).multiple(true)),
+)]
 pub struct Cli {
     /// Configuration file path
     #[clap(long, short = 'c', group = "config_group")]
