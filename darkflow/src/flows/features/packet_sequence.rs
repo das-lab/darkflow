@@ -10,14 +10,27 @@ pub struct PacketSequence {
 
     // ===== TCP flags =====
     window: Vec<u16>,
+
+    /*
+     | Flag| Binary | Function / Purpose        | Common Usage / Scenario                                                  |
+     | --- | ------ | ------------------------- | ------------------------------------------------------------------------ |
+     | FIN | 0x01   | Close connection          | Very important, indicates flow end                                       |
+     | SYN | 0x02   | Establish connection      | Very important, distinguishes new flows                                  |
+     | RST | 0x04   | Reset connection          | Important, detects errors / failed connections                           |
+     | PSH | 0x08   | Push data                 | Less common, indicates application layer data should be sent immediately |
+     | ACK | 0x10   | Acknowledgment valid      | Extremely common, present in almost every packet                         |
+     | URG | 0x20   | Urgent pointer            | Rarely used                                                              |
+     | ECE | 0x40   | ECN Echo                  | Rarely used, network congestion flag                                     |
+     | CWR | 0x80   | Congestion Window Reduced | Rarely used, usually with ECN                                            |
+     */
     fin: Vec<u8>,
     syn: Vec<u8>,
     rst: Vec<u8>,
     psh: Vec<u8>,
     ack: Vec<u8>,
-    urg: Vec<u8>,
-    cwr: Vec<u8>,
-    ece: Vec<u8>,
+    urg: Vec<u8>, // Rarely used
+    cwr: Vec<u8>, // Rarely used
+    ece: Vec<u8>, // Rarely used
 
     // ===== IP =====
     ttl: Vec<u8>,
