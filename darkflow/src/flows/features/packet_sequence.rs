@@ -52,7 +52,7 @@ impl PacketSequence {
             .map(|x| x.to_string())
             .collect::<Vec<_>>()
             .join(",");
-        format!("[{}]", inner)
+        format!("\"[{}]\"", inner)
     }
 }
 
