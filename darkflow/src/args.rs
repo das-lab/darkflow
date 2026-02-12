@@ -200,7 +200,7 @@ impl Default for ConfigFile {
     fn default() -> Self {
         ConfigFile {
             config: ExportConfig {
-                features: FlowType::Basic,
+                features: FlowType::Darkflow,
                 active_timeout: 3600,
                 idle_timeout: 120,
                 expiration_check_interval: 60,
@@ -208,11 +208,11 @@ impl Default for ConfigFile {
                 threads: None,
             },
             output: OutputConfig {
-                output: ExportMethodType::Print,
+                output: ExportMethodType::Csv,
                 export_path: None,
-                header: false,
+                header: true,
                 drop_contaminant_features: false,
-                performance_mode: false,
+                performance_mode: true,
             },
         }
     }
